@@ -12,7 +12,7 @@ import tech.mars.tengen.era.exception.MtException;
 
 
 /**
- * Create by user Michael_xu on 2018/1/5
+ *
  */
 public class ValidatorUtils {
 

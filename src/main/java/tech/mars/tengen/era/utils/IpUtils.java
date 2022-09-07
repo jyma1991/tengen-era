@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Create by user Michael_xu on 2019/5/5
+ *
  */
 public class IpUtils {
     public static final String UNKNOWN = "unknown";
