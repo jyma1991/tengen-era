@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+mybatis-plus:
+  configuration:
+    cache-enabled: false
+    use-generated-keys: true
+    default-executor-type: REUSE
+    use-actual-param-name: true
+  global-config:
+    db-config:
+      logic-delete-value: Y # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: N # 逻辑未删除值(默认为 0)

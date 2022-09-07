@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: tengen-era
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: ma
+  hikari:
+    maxLifetime: 2000000
+    poolName: SpringBootJPAHikariCP
+    connectionTimeout: 30000
+    idleTimeout: 30000
+    minimumIdle: 5
+    maximumPoolSize: 20
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+
+swagger:
+  enabled: true
+
+mybatis-plus:
+  configuration:
+    cache-enabled: false
+    use-generated-keys: true
+    default-executor-type: REUSE
+    use-actual-param-name: true
+  global-config:
+    db-config:
+      logic-delete-value: Y # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: N # 逻辑未删除值(默认为 0)
