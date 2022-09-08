@@ -1,16 +1,17 @@
 package tech.mars.tengen.era.entity;
 
+import java.io.Serializable;
+import java.util.Date;
+
+import lombok.Data;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.io.Serializable;
-import java.util.Date;
-
-import lombok.Data;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * <p>
@@ -21,7 +22,8 @@ import io.swagger.v3.oas.annotations.Parameter;
  * @since 2022-09-06
  */
 @Data
-@TableName(value = "t_user",autoResultMap = true)
+@TableName(value = "t_user", autoResultMap = true)
+@Schema(name = "UserDO", description = "$!{table.comment}")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,5 +72,16 @@ public class User implements Serializable {
     @Parameter(hidden = true)
     @JsonIgnore
     private String passwdSalt;
+
+    private Integer emailVerified;
+
+    private String picture;
+
+    private String fromClient;
+
+    private String thirdUserId;
+
+    private String userFrom;
+
 
 }

@@ -31,3 +31,7 @@ mybatis-plus:
     db-config:
       logic-delete-value: Y # 逻辑已删除值(默认为 1)
       logic-not-delete-value: N # 逻辑未删除值(默认为 0)
+
+google:
+  testApp:
+    clientId: 950042718028-39uj1p7emvfr5a006tfis4372uoh2cof.apps.googleusercontent.com

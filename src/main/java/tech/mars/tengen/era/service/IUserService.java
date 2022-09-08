@@ -1,10 +1,11 @@
 package tech.mars.tengen.era.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import tech.mars.tengen.era.entity.User;
 import tech.mars.tengen.era.entity.dto.LoginDTO;
+import tech.mars.tengen.era.entity.dto.LoginFromGoogleDTO;
 import tech.mars.tengen.era.entity.dto.TokenDTO;
 import tech.mars.tengen.era.entity.dto.UserDTO;
-import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
@@ -20,4 +21,6 @@ public interface IUserService extends IService<User> {
     Long saveOrUpdateUser(UserDTO req);
 
     TokenDTO login(LoginDTO req);
+
+    TokenDTO loginByGoogleIdToken(LoginFromGoogleDTO req);
 }

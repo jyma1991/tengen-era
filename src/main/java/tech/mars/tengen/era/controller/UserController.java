@@ -24,12 +24,14 @@ import tech.mars.tengen.era.aspect.annotation.Auth;
 import tech.mars.tengen.era.aspect.annotation.LogAround;
 import tech.mars.tengen.era.entity.User;
 import tech.mars.tengen.era.entity.dto.LoginDTO;
+import tech.mars.tengen.era.entity.dto.LoginFromGoogleDTO;
 import tech.mars.tengen.era.entity.dto.TokenDTO;
 import tech.mars.tengen.era.entity.dto.UserDTO;
 import tech.mars.tengen.era.entity.query.UserQuery;
 import tech.mars.tengen.era.entity.response.ResponseResult;
 import tech.mars.tengen.era.service.IUserService;
 import tech.mars.tengen.era.utils.IpUtils;
+import tech.mars.tengen.era.utils.ValidatorUtils;
 
 /**
  * <p>
@@ -58,19 +60,40 @@ public class UserController {
     }
 
     @LogAround
-    @Operation(summary ="login")
+    @Operation(summary = "login")
     @PostMapping("login")
-    public ResponseResult<TokenDTO> login(@RequestBody LoginDTO req, HttpServletRequest request){
+    public ResponseResult<TokenDTO> login(@RequestBody LoginDTO req, HttpServletRequest request) {
         String requestIp = IpUtils.getIpAddress(request);
-        log.info("login:"+req.getUserName()+" ip:"+requestIp);
+        log.info("login:" + req.getUserName() + " ip:" + requestIp);
         return ResponseResult.success(this.service.login(req));
     }
 
     @LogAround
+    @Operation(summary = "login with google id token")
+    @PostMapping("googleIdTokenLogin")
+    public ResponseResult<TokenDTO> googleIdTokenLogin(@RequestBody LoginFromGoogleDTO req, HttpServletRequest request) {
+        ValidatorUtils.validateEntity(req);
+        String requestIp = IpUtils.getIpAddress(request);
+        log.info("login ip:" + requestIp);
+        return ResponseResult.success(this.service.loginByGoogleIdToken(req));
+    }
+
+    @LogAround
+    @Operation(summary = "login with google id token")
+    @GetMapping("googleIdTokenLogin")
+    public ResponseResult<TokenDTO> googleIdTokenLogin2(String idToken, HttpServletRequest request) {
+        String requestIp = IpUtils.getIpAddress(request);
+        log.info("login ip:" + requestIp);
+        LoginFromGoogleDTO req = new LoginFromGoogleDTO();
+        req.setIdToken(idToken);
+        return ResponseResult.success(this.service.loginByGoogleIdToken(req));
+    }
+
+    @LogAround
     @Auth
-    @Operation(summary ="create or update user")
+    @Operation(summary = "create or update user")
     @PostMapping("createOrUpdate")
-    public ResponseResult<Long> CreateUser(@RequestBody UserDTO req){
+    public ResponseResult<Long> CreateUser(@RequestBody UserDTO req) {
         return ResponseResult.success(this.service.saveOrUpdateUser(req));
     }
 

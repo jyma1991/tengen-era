@@ -7,6 +7,7 @@ package tech.mars.tengen.era.generator;
 
 import org.junit.jupiter.api.Test;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
@@ -21,14 +22,14 @@ public class CodeGenerator extends BaseGenerator{
         FastAutoGenerator.create("jdbc:postgresql://localhost:5432/postgres", "postgres", "ma")
                 .globalConfig(builder -> {
                     builder.author("majunyang") // 设置作者
-                            .enableSwagger() // 开启 swagger 模式
+                            .enableSpringdoc() // 开启 swagger 模式
                             .outputDir("D:\\testOut"); // 指定输出目录
                 })
                 .packageConfig(builder -> {
                     builder.parent("tech.mars.tengen.era"); // 设置父包名
                 })
                 .strategyConfig(builder -> {
-                    builder.entityBuilder().enableLombok().entityBuilder();
+                    builder.entityBuilder().logicDeleteColumnName("is_deleted").formatFileName("%sDO").idType(IdType.NONE).enableLombok().controllerBuilder().enableRestStyle();
                     builder.addInclude("t_user") // 设置需要生成的表名
                             .addTablePrefix("t_"); // 设置过滤表前缀
                 })
